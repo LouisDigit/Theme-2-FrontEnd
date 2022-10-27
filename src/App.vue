@@ -1,9 +1,10 @@
 <script setup>
 import { RouterLink, RouterView } from "vue-router";
+import Home from "./views/Home.vue";
+import Dashboard from "./views/Dashboard.vue";
 </script>
 
 <template>
-  <h1>Hello World</h1>
   <RouterView />
 </template>
 
