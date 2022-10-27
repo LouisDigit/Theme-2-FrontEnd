@@ -4,9 +4,15 @@ module.exports = {
   theme: {
     colors: {
       background: "#333",
+      gray: "#333",
       white: "#fff",
+      lightGray: "#e5e7eb",
     },
-    extend: {},
+    extend: {
+      boxShadow: {
+        myShadow: "0px 54px 55px rgba(0, 0, 0, 0.25)",
+      },
+    },
   },
   plugins: [],
 };
