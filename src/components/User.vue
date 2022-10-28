@@ -1,5 +1,8 @@
 <script>
 export default {
+  props: {
+    toggle: Boolean,
+  },
   data() {
     return {
       username: "Username",
@@ -29,6 +32,7 @@ export default {
 </script>
 <template>
   <div
+    v-if="this.toggle"
     class="w-64 h-72 bg-lightGray flex flex-col items-center rounded-lg py-5 space-y-3"
   >
     <i class="fa-solid fa-user text-4xl"></i>

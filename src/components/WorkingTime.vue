@@ -8,6 +8,9 @@ const date = new Date(tmp);
 const dateFr = moment().locale("fr").format("LL");
 
 export default {
+  props: {
+    toggle: Boolean,
+  },
   data() {
     return {
       date: dateFr,
@@ -17,6 +20,7 @@ export default {
 </script>
 <template>
   <div
+    v-if="this.toggle"
     class="w-64 py-3 bg-lightGray rounded-lg flex items-center flex-col shadow-myShadow"
   >
     <h2 class="text-2xl mb-3 font-semibold">{{ date }}</h2>
