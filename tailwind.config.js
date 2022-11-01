@@ -9,6 +9,10 @@ module.exports = {
       lightGray: "#e5e7eb",
       componentBg: "#34495e",
       formBg: "#2c3e50",
+      red: "#ee5253",
+      green: "#2ecc71",
+      blue: "#3498db",
+      yellow: "#f1c40f",
     },
     extend: {
       boxShadow: {

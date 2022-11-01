@@ -5,6 +5,8 @@ import LineChart from "../components/Chart/LineChart.vue";
 import ColumnChart from "../components/Chart/ColumnChart.vue";
 import SideBar from "../components/SideBar.vue";
 import ChartManager from "../components/ChartManager.vue";
+import Calendar from "../components/Calendar.vue";
+import TopBar from "../components/TopBar.vue";
 export default {
   data() {
     return {
@@ -12,6 +14,7 @@ export default {
       toggleUser: true,
       toggleWorkingTime: false,
       toggleChartManager: false,
+      toggleCalendar: false,
     };
   },
   methods: {
@@ -19,16 +22,25 @@ export default {
       this.toggleUser = !this.toggleUser;
       this.toggleWorkingTime = false;
       this.toggleChartManager = false;
+      this.toggleCalendar = false;
     },
     handleWorkingTime() {
       this.toggleWorkingTime = !this.toggleWorkingTime;
       this.toggleUser = false;
       this.toggleChartManager = false;
+      this.toggleCalendar = false;
     },
     handleChartManager() {
       this.toggleChartManager = !this.toggleChartManager;
       this.toggleUser = false;
       this.toggleWorkingTime = false;
+      this.toggleCalendar = false;
+    },
+    handleCalendar() {
+      this.toggleCalendar = !this.toggleCalendar;
+      this.toggleUser = false;
+      this.toggleWorkingTime = false;
+      this.toggleChartManager = false;
     },
   },
   components: {
@@ -38,20 +50,31 @@ export default {
     ColumnChart,
     SideBar,
     ChartManager,
+    Calendar,
+    TopBar,
   },
 };
 </script>
 
 <template>
-  <SideBar
-    :handleUser="this.handleUser"
-    :handleWorkingTime="this.handleWorkingTime"
-    :handleChartManager="this.handleChartManager"
-  />
-
-  <div class="h-screen w-screen flex items-center justify-center">
-    <User :toggle="this.toggleUser" />
-    <WorkingTime :toggle="this.toggleWorkingTime" />
-    <ChartManager :toggle="this.toggleChartManager" />
+  <div class="flex flex-row h-screen w-screen">
+    <SideBar
+      :handleUser="this.handleUser"
+      :handleWorkingTime="this.handleWorkingTime"
+      :handleChartManager="this.handleChartManager"
+      :handleCalendar="this.handleCalendar"
+    />
+    <div class="flex flex-col w-full h-full">
+      <TopBar firstname="Louis" lastname="Vanoise" />
+      <div class="h-screen w-full flex items-center justify-center">
+        <User
+          :toggle="this.toggleUser"
+          :handleChartManager="this.handleChartManager"
+        />
+        <WorkingTime :toggle="this.toggleWorkingTime" />
+        <ChartManager :toggle="this.toggleChartManager" />
+        <Calendar :toggle="this.toggleCalendar" />
+      </div>
+    </div>
   </div>
 </template>

@@ -44,7 +44,7 @@ export default {
           action=""
           class="flex flex-col space-y-3 justify-center items-center text-sm"
         >
-          <h2 class="text-xl font-bold uppercase">Go to user dashboard</h2>
+          <h2 class="text-xl font-bold uppercase">Go to user</h2>
           <Separator />
           <div class="flex flex-col space-y-3">
             <label for="username">Username</label>

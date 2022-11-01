@@ -4,6 +4,7 @@ export default {
     handleUser: Function,
     handleWorkingTime: Function,
     handleChartManager: Function,
+    handleCalendar: Function,
   },
   data() {
     return {
@@ -11,81 +12,35 @@ export default {
       username: "Username",
     };
   },
-  methods: {
-    toggleSidebar() {
-      this.isExpand = !this.isExpand;
-    },
-  },
+  methods: {},
 };
 </script>
 <template>
   <div
-    class="sidebar w-24 h-screen bg-componentBg flex flex-col items-center absolute"
+    class="sidebar h-screen w-48 px-3 bg-componentBg flex flex-col items-center shadow-myShadow"
     v-bind:class="{ 'w-72': isExpand }"
   >
-    <div class="flex flex-row items-center justify-center">
-      <i
-        v-if="!this.isExpand"
-        @click="toggleSidebar"
-        class="fa-solid fa-bars text-white text-4xl absolute mt-10"
-      ></i>
-      <span
-        v-if="this.isExpand"
-        @click="toggleSidebar"
-        class="material-symbols-outlined text-5xl text-white"
-      >
-        keyboard_double_arrow_left
-      </span>
-    </div>
+    <ul class="flex flex-col w-full h-full justify-center space-y-6">
+      <li @click="this.handleUser" class="flex flex-row items-center">
+        <i class="fa-solid fa-home text-white text-3xl"></i>
+        <span class="text-xl ml-5 text-white">Home</span>
+      </li>
+      <li @click="this.handleWorkingTime" class="flex flex-row items-center">
+        <i class="fa-solid fa-clock text-white text-3xl"></i>
+        <span class="text-xl ml-5 w-24 text-white whitespace-nowrap"
+          >Clock it</span
+        >
+      </li>
+      <li @click="this.handleChartManager" class="flex flex-row items-center">
+        <i class="fa-solid fa-chart-simple text-white text-3xl"></i>
 
-    <ul
-      class="flex flex-col w-full h-full items-center justify-center space-y-8"
-    >
-      <li>
-        <i
-          @click="this.handleUser"
-          v-if="!this.isExpand"
-          class="fa-solid fa-user text-white text-3xl"
-        ></i>
-        <span
-          @click="this.handleUser"
-          v-if="this.isExpand"
-          class="text-white text-3xl"
-          >HOME</span
+        <span class="text-xl ml-5 w-24 text-white whitespace-nowrap"
+          >Graphs</span
         >
       </li>
-      <li>
-        <i
-          @click="this.handleWorkingTime"
-          v-if="!this.isExpand"
-          class="fa-solid fa-clock text-white text-3xl"
-        ></i>
-        <span
-          @click="this.handleWorkingTime"
-          v-if="this.isExpand"
-          class="text-white text-3xl"
-          >CLOCK</span
-        >
-      </li>
-      <li>
-        <i
-          @click="this.handleChartManager"
-          v-if="!this.isExpand"
-          class="fa-solid fa-chart-simple text-white text-3xl"
-        ></i>
-        <span
-          @click="this.handleChartManager"
-          v-if="this.isExpand"
-          class="text-white text-3xl"
-          >GRAPH</span
-        >
-      </li>
-      <li>
-        <i
-          v-if="!this.isExpand"
-          class="fa-solid fa-calendar text-white text-3xl"
-        ></i>
-        <span v-if="this.isExpand" class="text-white text-3xl"> CALENDAR</span>
+      <li @click="this.handleCalendar" class="flex flex-row items-center">
+        <i class="fa-solid fa-calendar text-white text-3xl"></i>
+        <p class="text-xl ml-5 w-24 text-white whitespace-nowrap">Calendar</p>
       </li>
     </ul>
   </div>

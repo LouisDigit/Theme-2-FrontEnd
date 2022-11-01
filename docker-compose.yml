@@ -1,0 +1,17 @@
+version: "3"
+services:
+  front:
+    build: .
+    container_name: container_chronos_front
+    restart: always
+    networks:
+      - dev
+    ports:
+      - 8080:8080
+  postgres:
+    image: postgres
+    restart: always
+    environment:
+      POSTGRES_PASSWORD: postgres
+networks:
+  dev:
