@@ -1,27 +1,23 @@
 <script>
+import { json } from "body-parser";
+
 export default {
   props: {
     toggle: Boolean,
     handleChartManager: Function,
+    userId: Number,
   },
   data() {
     return {
+      userId: this.userId,
       month: "Août",
       hoursMonth: 49,
       nbCP: 32,
       nbRTT: 12,
       hoursSupp: 22,
       year: 2022,
-      firstname: "Louis",
-      lastname: "Vanoise",
-      email: "louis.vanoise@epitech.eu",
-      position: "Developper Web",
-      phone: "06 06 06 06 99",
-      born: "18/04/2001",
-      society: "Coqliqo",
     };
   },
-  methods: {},
 };
 </script>
 <template>
@@ -55,28 +51,28 @@ export default {
         <div class="flex flex-col items-center">
           <i class="fa-solid fa-user text-3xl"></i>
           <h1 class="text-3xl whitespace-nowrap">
-            {{ firstname }} {{ lastname }}
+            {{ $store.state.user.firstname }} {{ $store.state.user.lastname }}
           </h1>
         </div>
         <div class="flex items-center">
           <i class="fa-solid fa-envelope"></i>
-          <p class="ml-3">{{ email }}</p>
+          <p class="ml-3">{{ $store.state.user.email }}</p>
         </div>
         <div class="flex items-center">
           <i class="fa-solid fa-calendar-days"></i>
-          <p class="ml-3">{{ born }}</p>
+          <p class="ml-3">{{ $store.state.user.born }}</p>
         </div>
         <div class="flex items-center">
           <i class="fa-solid fa-phone"></i>
-          <p class="ml-3">{{ phone }}</p>
+          <p class="ml-3">{{ $store.state.user.phone }}</p>
         </div>
         <div class="flex items-center">
           <i class="fa-solid fa-building"></i>
-          <p class="ml-3">{{ society }}</p>
+          <p class="ml-3">{{ $store.state.user.society }}</p>
         </div>
         <div class="flex items-center">
           <i class="fa-solid fa-briefcase"></i>
-          <p class="ml-3 whitespace-nowrap">{{ position }}</p>
+          <p class="ml-3 whitespace-nowrap">{{ $store.state.user.position }}</p>
         </div>
       </div>
       <div class="w-1/3 flex flex-col items-center">

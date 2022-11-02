@@ -3,9 +3,10 @@ import "@fullcalendar/core/vdom"; // solves problem with Vite
 import FullCalendar from "@fullcalendar/vue3";
 import dayGridPlugin from "@fullcalendar/daygrid";
 import interactionPlugin from "@fullcalendar/interaction";
+
 export default {
   components: {
-    FullCalendar, // make the <FullCalendar> tag available
+    FullCalendar,
   },
   props: {
     toggle: Boolean,
@@ -15,23 +16,23 @@ export default {
       calendarOptions: {
         plugins: [dayGridPlugin, interactionPlugin],
         initialView: "dayGridMonth",
-        dateClick: this.handleDateClick,
-        events: [
-          { title: "event 1", date: "2019-04-01" },
-          { title: "event 2", date: "2019-04-02" },
-        ],
+        height: "auto",
+        weekends: false,
       },
     };
   },
   methods: {
-    handleDateClick: function (arg) {
-      alert("date click! " + arg.dateStr);
+    toggleWeekEnds: function () {
+      this.calendarOptions.weekends = !this.calendarOptions.weekends;
     },
   },
+  create() {},
 };
 </script>
 <template>
-  <div v-if="this.toggle" class="w-full h-full bg-lightGray">
+  <div v-if="this.toggle" class="w-full h-full bg-lightGray p-3">
+    {{ $store.state.workingTimeDay[0] }}
+    <button @click="toggleWeekEnds" class="btn mx-[50%]">week-ends</button>
     <FullCalendar :options="calendarOptions" />
   </div>
 </template>
