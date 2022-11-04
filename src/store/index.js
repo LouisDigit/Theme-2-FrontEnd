@@ -4,6 +4,7 @@ import axios from "axios";
 
 export default createStore({
   state: {
+    idLogged: "",
     user: {},
     workingTimeDay: {},
     hello: "bonjour",

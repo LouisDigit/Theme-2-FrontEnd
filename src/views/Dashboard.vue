@@ -11,7 +11,7 @@ import TopBar from "../components/TopBar.vue";
 export default {
   data() {
     return {
-      userId: 1,
+      userId: this.$store.state.idLogged,
       toggleUser: true,
       toggleWorkingTime: false,
       toggleChartManager: false,
