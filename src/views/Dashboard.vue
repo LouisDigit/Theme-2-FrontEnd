@@ -43,16 +43,6 @@ export default {
       this.toggleWorkingTime = false;
       this.toggleChartManager = false;
     },
-    async getUser() {
-      await axios
-        .get(`http://localhost:4000/api/users/${this.userId}`)
-        .then((response) => (this.user = response.data.data));
-    },
-    async getWorkingTimesToday() {
-      await axios
-        .get(`http://localhost:4000/api/workingtimes/user/${this.userId}`)
-        .then((response) => (this.workingTimeDay = response.data.data));
-    },
   },
   mounted() {
     this.$store.commit("SET_USER", this.userId);
@@ -79,6 +69,7 @@ export default {
       :handleChartManager="this.handleChartManager"
       :handleCalendar="this.handleCalendar"
     />
+
     <div class="flex flex-col w-full h-full">
       <TopBar
         :firstname="$store.state.user.firstname"

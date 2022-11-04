@@ -13,18 +13,6 @@ export default {
   data() {
     return {
       date: date,
-      sessions: [
-        {
-          start: "8:00",
-          end: "12:00",
-          message: "Build a new project in Vue JS",
-        },
-        {
-          start: "13:00",
-          end: "17:30",
-          message: "End the project",
-        },
-      ],
     };
   },
 };
@@ -62,7 +50,7 @@ export default {
               <th align="left">END</th>
               <th align="left">MESSAGE</th>
             </tr>
-            <tr v-for="session in sessions" class="text-lg">
+            <tr v-for="session in $store.state.workingTimeDay" class="text-lg">
               <td>{{ session.start }}</td>
               <td>{{ session.end }}</td>
               <td class="flex flex-row justify-between">
