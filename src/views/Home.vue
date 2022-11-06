@@ -6,6 +6,7 @@ import axios from "axios";
 export default {
   data() {
     return {
+      isLogged: false,
       signIn: false,
       signUp: false,
       userForm: {
@@ -24,6 +25,7 @@ export default {
         password: "",
       },
       signUpMessage: "",
+      signInMessage: "",
     };
   },
   methods: {
@@ -70,19 +72,19 @@ export default {
       }
     },
     async signInUser() {
-      console.log(this.userSignIn);
-      const token = await axios
+      let result = await axios
         .post("http://localhost:4000/api/v1/sign_in", this.userSignIn)
-        .then((response) => response.data.jwt);
-      const config = {
-        headers: { Authorization: `Bearer ${token}` },
-      };
-      const userLogged = await axios
-        .get("http://localhost:4000/api/v1/my_user", config)
-        .then((response) => response.data.id);
-      this.$store.state.idLogged = userLogged.id;
-      console.log($store.state.idLogged);
-      // window.location.href = "http://localhost:5173/dashboard";
+        .then((response) => response)
+        .catch(() => {
+          this.signInMessage = "Wrong Identifier !";
+          document.getElementById("signInEmail").value = "";
+          document.getElementById("signInPassword").value = "";
+        });
+      if (result.status == 200) {
+        this.$store.state.token = result.data.jwt;
+        this.$store.state.isLogged = true;
+        this.$router.push("dashboard");
+      }
     },
     resetSignUpForm() {
       this.userForm = {
@@ -109,6 +111,7 @@ export default {
       }
     },
   },
+  updated() {},
   components: {
     Header,
     Separator,
@@ -118,10 +121,12 @@ export default {
 
 <template>
   <Header />
+
   <div
     class="flex flex-col w-fit bg-componentBg m-auto mt-24 text-white rounded-lg px-5 py-5 shadow-myShadow"
   >
     <p class="text-center text-red text-xl">{{ signUpMessage }}</p>
+    <p class="text-center text-red text-xl">{{ signInMessage }}</p>
     <div class="flex flex-row px-10 justify-center mt-3">
       <button @click="handleSignIn" class="btn">Sign In</button>
       <button @click="handleSignUp" class="btn ml-5">Sign Up</button>

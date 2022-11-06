@@ -7,16 +7,35 @@ import SideBar from "../components/SideBar.vue";
 import ChartManager from "../components/ChartManager.vue";
 import Calendar from "../components/Calendar.vue";
 import TopBar from "../components/TopBar.vue";
+import axios from "axios";
 
 export default {
   data() {
     return {
-      userId: this.$store.state.idLogged,
+      userId: "",
       toggleUser: true,
       toggleWorkingTime: false,
       toggleChartManager: false,
       toggleCalendar: false,
+      token: "",
     };
+  },
+  async mounted() {
+    if (this.$store.state.isLogged) {
+      const config = {
+        headers: { Authorization: `Bearer ${this.$store.state.token}` },
+      };
+      const data = await axios
+        .get("http://localhost:4000/api/v1/my_user", config)
+        .then((response) => response);
+      if (data.status == 200) {
+        this.$store.state.userLogged = data.data;
+        console.log(this.$store.state.userLogged);
+      }
+    } else {
+      this.$router.push({ path: "/" });
+      alert("Vous n'êtes pas connectés !");
+    }
   },
   methods: {
     handleUser() {
@@ -44,10 +63,6 @@ export default {
       this.toggleChartManager = false;
     },
   },
-  mounted() {
-    this.$store.commit("SET_USER", this.userId);
-    this.$store.commit("SET_WORKINGTIMES_DAY", this.userId);
-  },
   components: {
     User,
     WorkingTime,
@@ -71,13 +86,10 @@ export default {
     />
 
     <div class="flex flex-col w-full h-full">
-      <TopBar
-        :firstname="$store.state.user.firstname"
-        :lastname="$store.state.user.lastname"
-      />
+      <TopBar />
       <div class="h-screen w-full flex items-center justify-center">
         <User
-          :userId="this.userId"
+          :userId="this.$store.state.userLogged.id"
           :toggle="this.toggleUser"
           :handleChartManager="this.handleChartManager"
         />

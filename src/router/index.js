@@ -7,10 +7,12 @@ const router = createRouter({
   routes: [
     {
       path: "/",
+      name: "home",
       component: Home,
     },
     {
       path: "/dashboard/",
+      name: "dashboard",
       component: Dashboard,
     },
   ],
